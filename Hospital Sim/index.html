@@ -1,0 +1,182 @@
+<!--This is a going to be a hospital simulation-->
+<!--Tell the browser the type of doc-->
+<!DOCTYPE html>
+<!--Start the html section-->
+<html lang="en">
+<!--Start the head section-->
+<head>
+    <!--Give the tab the title of this app-->
+    <title>Hospital Hustle</title>
+    <!--Add meta tag-->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--Add the CSS page style-->
+    <style>
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            background-color: rgb(245, 94, 125);
+        }
+
+        #game {
+            margin: 0 auto;
+            width: 800px;
+        }
+
+        #stats {
+            float: left;
+            width: 200px;
+        }
+
+        #building {
+            float: left;
+            width: 300px;
+        }
+
+        #patients {
+            float: left;
+            width: 300px;
+        }
+
+        button {
+            margin: 5px;
+            padding: 10px;
+            background-color: dodgerblue;
+            color: floralwhite;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: lightskyblue;
+        }
+
+    </style>
+<!--End the head section-->
+</head>
+<!--Start the body section-->
+<body>
+    <div id="game">
+        <!--Add a header for our hospital sim-->
+        <h1>Hospital Hustle</h1>
+        <h2>A Hospital Simulation</h2>
+        <!--Add a division for the stats-->
+        <div id="stats">
+            <!--This is the heade4r for the stats-->
+            <h3>Stats</h3>
+            <!--The p tag is an html tag that is the paragraph tag, this starts on a new line-->
+            <!--The span tag is an html that spans in the same line-->
+            <p>Money: <span id="money">10000</span></p>
+            <p>Patients: <span id="patients">0</span></p>
+            <p>Doctors: <span id="doctors">0</span></p>
+            <p>Nurses: <span id="nurses">0</span></p>
+        </div>
+        <!--Add a div for the Building-->
+        <div id="buildings">
+            <!--This is the header for buildings-->
+            <h3>Buildings</h3>
+            <!--Add a button to build a room-->
+            <button id="build-room" onclick= "buildRoom()">Build room ($5000)</button>
+            <!--Add a button for the Hospital-->
+            <button id="hire-doctor" onclick= "hireDoctor()">Hire doctor ($1000)</button>
+            <!--Add a button for the research center-->
+            <button id="hire-nurse" onclick= "hireNurse()">Hire nurse ($500)</button>
+        </div>
+        <!-- Add a div for the patients -->
+        <div id="patients">
+            <!-- This is the header for the patients -->
+            <h3>Patients</h3>
+            <!-- Add a button or the clinic -->
+            <button id="treat-patient" onclick="treatPatient()">Treat Patient</button>
+        </div>
+    </div>
+    <!-- Add javascript -->
+    <!-- Javascript functions and code start here -->
+    <script>
+         // Create the variables for the stats
+        var money = 10000;
+        var patients = 0;
+        var doctors = 0;
+        var nurses = 0;
+
+        // Create a funtion to update the stats
+        function updateStats(){
+            // Ypdate the stats
+            document.getElementById("money").innerHTML = money;
+            document.getElementById("patients").innerHTML = patients;
+            document.getElementById("doctors").innerHTML = doctors;
+            document.getElementById("nurses").innerHTML = nurses;
+        }
+        // Create a function to build a room
+        function buildRoom(){
+            // Check if we have enough money
+            if (money>= 5000){
+                // Subtract the money
+                money = money - 5000;
+                // Update the stats
+                updateStats();
+            }
+        }
+
+        // Create a function to hire a doctor
+        function hireDoctor(){
+            // Check if we have enough money
+            if (money>= 1000){
+               // Subtract the money
+                money = money - 1000;
+                // Add a doctor
+                doctors = doctors + 1;
+                // Update the stats
+                updateStats();
+            }
+        }
+
+        // Create a function to hire a nurse
+        function hireNurse(){
+            if (money >= 500 ){
+                // Subtract the money
+                money = money - 500;
+                // Add a nurse
+                nurses = nurses + 1;
+                // update the stats
+                updateStats();
+            }
+        }
+
+        // Create a function to treat a patient
+        function treatPatient(){
+            // Check if we have enugh doctors and nurses
+            if (doctors >= 1 && nurses >= 1){
+                // If we do, then subtract the doctors and nurses
+                doctors = doctors - 1;
+                nurses = nurses - 1;
+                // Add money to the hospital for treating the patient
+                money = money + 10000;
+                // Update the stats
+                updateStats();
+            }
+        }
+
+        setInterval(function(){
+            // Check and see if we have less than 10 patients
+            if (patients < 10){
+                // If under 10 add a patient every 30 seconds
+                patients = patients + 1
+                // Update the stats
+                updateStats();
+            }
+            
+        }, 30000);
+
+
+    // Javascript functions and code will end here
+    </script>
+<!--End the body section-->
+</body>
+
+
+
+
+
+<!--end the html section-->
+</html>
